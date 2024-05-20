@@ -102,6 +102,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MondayBookingScheduler.cpp" />
     <ClCompile Include="SundayBookingScheduler.cpp" />
+    <ClCompile Include="TestableBookingScheduler.cpp" />
     <ClCompile Include="TestableMailSender.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="pch.cpp">
