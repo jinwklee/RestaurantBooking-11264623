@@ -3,8 +3,6 @@
 #include "TestableSmsSender.cpp"
 #include "TestableMailSender.cpp"
 #include "TestableBookingScheduler.cpp"
-#include "SundayBookingScheduler.cpp"
-#include "MondayBookingScheduler.cpp"
 
 using namespace std;
 
@@ -45,7 +43,6 @@ public:
 	BookingScheduler bookingScheduler{ CAPACITY_PER_HOUR };
 	TestableSmsSender testableSmsSender;
 	TestableMailSender testableMailSender;
-	TestableBookingScheduler testableBookingScheduler;
 	
 };
 
@@ -125,8 +122,8 @@ TEST_F(BookingItem, 이메일이_있는_경우에는_이메일_발송) {
 }
 
 TEST_F(BookingItem, 현재날짜가_일요일인_경우_예약불가_예외처리) {
-	//BookingScheduler* bookingScheduler = new SundayBookingScheduler(CAPACITY_PER_HOUR);
-	TestableBookingScheduler* bookingScheduler = new TestableBookingScheduler(CAPACITY_PER_HOUR, SUNDAY);
+
+	BookingScheduler* bookingScheduler = new TestableBookingScheduler(CAPACITY_PER_HOUR, SUNDAY);
 
 	try {
 		Schedule* schedule = new Schedule{ ON_THE_HOUR, UNDER_CAPACITY, CUSTOMER_WITH_MAIL };
@@ -139,8 +136,8 @@ TEST_F(BookingItem, 현재날짜가_일요일인_경우_예약불가_예외처�
 }
 
 TEST_F(BookingItem, 현재날짜가_일요일이_아닌경우_예약가능) {
-	//BookingScheduler* bookingScheduler = new MondayBookingScheduler(CAPACITY_PER_HOUR);
-	TestableBookingScheduler* bookingScheduler = new TestableBookingScheduler(CAPACITY_PER_HOUR,MONDAY);
+
+	BookingScheduler* bookingScheduler = new TestableBookingScheduler(CAPACITY_PER_HOUR,MONDAY);
 	
 	Schedule* schedule = new Schedule{ ON_THE_HOUR, UNDER_CAPACITY, CUSTOMER_WITH_MAIL };
 	bookingScheduler->addSchedule(schedule);
